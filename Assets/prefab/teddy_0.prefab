@@ -15,8 +15,11 @@ GameObject:
   - component: {fileID: 2161978552074952148}
   - component: {fileID: 2698453552317406693}
   - component: {fileID: 6835066720156255608}
-  - component: {fileID: 7812259707927440013}
   - component: {fileID: 3928969329887963812}
+  - component: {fileID: -8105261184559152980}
+  - component: {fileID: 8203746359696093304}
+  - component: {fileID: 5257797790374899877}
+  - component: {fileID: 7784574949192645706}
   m_Layer: 0
   m_Name: teddy_0
   m_TagString: teddy
@@ -234,8 +237,35 @@ MonoBehaviour:
   m_labelHash: 3.5604857e-14
   m_SpriteKey: 0
   m_SpriteHash: 0
---- !u!70 &7812259707927440013
-CapsuleCollider2D:
+--- !u!114 &3928969329887963812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157774673606889629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374957a0f8a7fad488caa23e2799a251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::tobyAnimDriver
+  facingDirection: 1
+--- !u!114 &-8105261184559152980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157774673606889629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7632fce840d1a7f4a8a182810dc54a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::tobyPatrol
+  waypointParent: {fileID: 0}
+  loopWaypoints: 1
+--- !u!58 &8203746359696093304
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -268,10 +298,25 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.0257022, y: -0.02749086}
-  m_Size: {x: 3.6154115, y: 1.4590356}
-  m_Direction: 1
---- !u!114 &3928969329887963812
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 2.16
+--- !u!114 &5257797790374899877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157774673606889629}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0f3ac9fa615214e9cbe81ed369253c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridChase2D
+  target: {fileID: 0}
+  moveSpeed: 2.5
+  repathEvery: 0.25
+  reachDist: 0.1
+--- !u!114 &7784574949192645706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,7 +325,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3157774673606889629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374957a0f8a7fad488caa23e2799a251, type: 3}
+  m_Script: {fileID: 11500000, guid: 0838d1679db41214f9bff72c706b92c6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::tobyAnimDriver
-  facingDirection: 1
+  m_EditorClassIdentifier: Assembly-CSharp::tobyBrain
+  returnPercent: 0.8

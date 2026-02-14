@@ -1,26 +1,19 @@
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class tobyAnimDriver : MonoBehaviour
 {
-private Animator animator;
-public int facingDirection = 1;
-private Vector2 lastDir = Vector2.down;
+    private Animator animator;
+    public int facingDirection = 1;
+    private Vector2 lastDir = Vector2.down;
 
-
-    void Start()
-    {
-        GetComponent<Animator>();
-    }
     void Awake()
     {
-        if (!animator) animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     public void SetMovement(Vector2 dir, bool isMoving)
     {
-        if(isMoving && dir.sqrMagnitude > 0.0001f)
+        if (isMoving && dir.sqrMagnitude > 0.0001f)
         {
             dir.Normalize();
 
@@ -46,6 +39,6 @@ private Vector2 lastDir = Vector2.down;
         facingDirection *= -1;
         Vector3 s = transform.localScale;
         s.x *= -1;
-        transform.localScale = s;        
+        transform.localScale = s;
     }
 }

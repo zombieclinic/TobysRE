@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Animator animator;
 
+    public int teddyChance = 0;
+
     
 
     public int facingDirection = 1;

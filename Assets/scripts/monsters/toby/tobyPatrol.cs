@@ -5,8 +5,8 @@ using UnityEngine;
 public class tobyPatrol : MonoBehaviour
 {
     public Transform waypointParent;
-    public float moveSpeed = 1f;
-    public float waitTime = 2f;
+    private float moveSpeed = 1f;
+    private float waitTime = 5f;
     public bool loopWaypoints = true;
 
     private Transform[] waypoints;
@@ -20,17 +20,49 @@ public class tobyPatrol : MonoBehaviour
 
 
 
+    void Awake()
+    {
+         if (waypointParent == null)
+        waypointParent = GameObject.Find("waypoints")?.transform;
+
+    if (waypointParent == null)
+    {
+        Debug.LogError($"{name}: Could not find GameObject named 'waypoints' in the scene.");
+        enabled = false;
+    }
+    }
+
     void Start()
     {
-       
-        anim = GetComponent<tobyAnimDriver>();
-        //  Get children, exclude the parent, SORT BY NUMBER IN NAME
-        waypoints = waypointParent
-            .Cast<Transform>() 
-            .OrderBy(t => ExtractNumber(t.name))
-            .ToArray();
+    anim = GetComponent<tobyAnimDriver>();
 
-       
+    waypoints = waypointParent
+        .Cast<Transform>()
+        .OrderBy(t => ExtractNumber(t.name))
+        .ToArray();
+
+    // Start patrol at closest waypoint
+    currentWayPointIndex = GetClosestWaypointIndex();
+    }
+
+    private int GetClosestWaypointIndex()
+    {
+        if (waypoints == null || waypoints.Length == 0) return 0;
+
+        int bestIndex = 0;
+        float bestDistSqr = Mathf.Infinity;
+        Vector2 myPos = transform.position;
+
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            float d = ((Vector2)waypoints[i].position - myPos).sqrMagnitude;
+            if (d < bestDistSqr)
+            {
+                bestDistSqr = d;
+                bestIndex = i;
+            }
+        }
+        return bestIndex;
     }
 
     void Update()
@@ -87,4 +119,20 @@ public class tobyPatrol : MonoBehaviour
         return int.TryParse(digits, out int n) ? n : int.MaxValue;
     }
 
+    public void ResetToClosestWaypoint()
+{
+    if (waypoints == null || waypoints.Length == 0) return;
+
+    StopAllCoroutines();
+    isWaiting = false;
+
+    currentWayPointIndex = GetClosestWaypointIndex();
+
+
+    anim.SetMovement(lastDir, false);
 }
+
+
+}
+
+

@@ -1,0 +1,36 @@
+:root {
+}
+
+.Title {
+    font-size: 150px;
+    -unity-text-align: upper-center;
+    padding-bottom: 0;
+    padding-top: 100px;
+}
+
+.button {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0);
+    color: rgb(23, 84, 12);
+    font-size: 60px;
+    -unity-font-definition: url("project://database/Assets/fonts/Creepster-Regular.ttf?fileID=12800000&guid=2205398dff1079d4c9e2a4b3ca441ff9&type=3#Creepster-Regular");
+    top: auto;
+    padding-top: 0;
+    width: 150px;
+    height: 60px;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-bottom-width: 0;
+    border-right-width: 0;
+    border-top-color: rgb(8, 10, 229);
+    border-left-color: rgb(8, 10, 229);
+    border-right-color: rgb(8, 10, 229);
+    border-bottom-color: rgb(8, 10, 229);
+    margin-top: 150px;
+    align-self: center;
+    -unity-font-style: bold;
+}
+
+.button:hover {
+    scale: 1.1 1.1 1.1;
+    color: rgb(128, 14, 7);
+}

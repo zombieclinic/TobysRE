@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/howtostart/howtoplaystyle.uss?fileID=7433441132597879392&amp;guid=99238fe6d8bcb8f4480ef86fa3b8ae60&amp;type=3#howtoplaystyle"/>
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/sprites/ui/title.png?fileID=2800000&amp;guid=168b067a50d255e4bb0918033d077596&amp;type=3#title&quot;);">
+        <ui:Label text="How To Play" style="font-size: 120px; -unity-text-align: upper-left; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/fonts/Creepster-Regular.ttf?fileID=12800000&amp;guid=2205398dff1079d4c9e2a4b3ca441ff9&amp;type=3#Creepster-Regular&quot;); color: rgb(5, 75, 16); align-self: center;"/>
+        <ui:Label text="Controls" class="Titles" style="align-self: flex-start; color: rgb(5, 75, 16); -unity-font-style: bold; font-size: 100px; -unity-font-definition: url(&quot;project://database/Assets/fonts/Creepster-Regular.ttf?fileID=12800000&amp;guid=2205398dff1079d4c9e2a4b3ca441ff9&amp;type=3#Creepster-Regular&quot;); justify-content: flex-start; align-items: auto; align-content: flex-start; padding-left: 1px; margin-left: 100px;"/>
+        <ui:Label text="Move: W A S D" class="instructions" style="font-size: 50px; color: rgb(5, 75, 16);"/>
+        <ui:Label text="Run: Hold Shift" class="instructions"/>
+        <ui:Label text="FlashLight: Left Click (toggle on/off)" class="instructions"/>
+        <ui:Label text="Pick up ID cards/Interact: E" class="instructions"/>
+        <ui:Label text="Goals" class="Titles" style="padding-left: 100px;"/>
+        <ui:Label text="Find all 3 ID cards" class="instructions"/>
+        <ui:Label text="Use them to open the Exit door and Escape" class="instructions"/>
+        <ui:Label text="Auto Refill your lamp in the start location" class="instructions"/>
+        <ui:Button text="Start Game" name="startButtonLabel" class="button" style="border-left-width: 0; border-bottom-width: 0; border-right-width: 0; border-top-width: 0;"/>
+    </ui:VisualElement>
+</ui:UXML>

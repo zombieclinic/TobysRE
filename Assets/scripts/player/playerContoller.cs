@@ -275,6 +275,11 @@ public class PlayerController : MonoBehaviour
 }
 
 
+    public void RebindInputNow()
+{
+    StartCoroutine(EnableInputNextFrame());
+}
+
 
 
 

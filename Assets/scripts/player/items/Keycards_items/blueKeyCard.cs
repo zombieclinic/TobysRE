@@ -3,12 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class BlueKeyCard : MonoBehaviour, IInteractable
 {
-    public GameObject player;
-    public GameObject MainCamera;
-    public GameObject CineMachine;
+    private GameObject Player;
+    private GameObject MainCamera;
+    private GameObject CineMachine;
+
+    void Awake()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        CineMachine = GameObject.FindGameObjectWithTag("CineMachine");
+    }
     public void Interact(PlayerController player)
     {
-        DontDestroyOnLoad(player);
+        
+        DontDestroyOnLoad(Player);
         DontDestroyOnLoad(MainCamera);
         DontDestroyOnLoad(CineMachine);
         SceneManager.LoadScene("blueCardKeyGame");

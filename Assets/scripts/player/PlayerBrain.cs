@@ -18,6 +18,7 @@ public class PlayerBrain : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
     public bool SprintHeld { get; private set; }
     public bool JumpPressed { get; private set; } 
+    private bool paused = false;
 
     private PlayerInput playerInput;
     private InputAction moveAction;
@@ -137,15 +138,16 @@ public class PlayerBrain : MonoBehaviour
 
     public void TogglePause()
     {
-        bool paused = Time.timeScale == 0f;
-        Time.timeScale = paused ? 1f : 0f;
+        paused = !paused;
+        Time.timeScale = paused ? 0f : 1f;
 
         if (pauseMenu != null)
-            pauseMenu.SetActive(!paused);
+            pauseMenu.SetActive(paused);
     }
 
     private void OnAttack(InputAction.CallbackContext ctx)
 {
+    if(paused == true) return;
     if (!ctx.performed) return;
     lightToggle?.Toggle();
 }

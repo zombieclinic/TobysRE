@@ -8,7 +8,7 @@ public class keyCardsUi : MonoBehaviour
       [SerializeField] private UIDocument uiDocument;
 
     [Header("Player")]
-    [SerializeField] private PlayerController player;
+    [SerializeField] private PlayerBrain player;
 
     [Header("keyCards")]
     private Image YellowPic;
@@ -33,9 +33,7 @@ public class keyCardsUi : MonoBehaviour
     {
         if (player == null) return;
 
-        SetVisible(YellowPic, player.yellowKeyCard);
-        SetVisible(RedPic, player.redKeyCard);
-        SetVisible(BluePic, player.blueKeyCard);
+       
     }
 
     private void SetVisible(VisualElement el, bool visible)

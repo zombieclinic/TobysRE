@@ -13,7 +13,7 @@ public class TeddyTrigger : MonoBehaviour
         if (!collision.CompareTag("Player")) return;
 
         
-        PlayerController player = collision.GetComponentInParent<PlayerController>();
+        PlayerBrain player = collision.GetComponent<PlayerBrain>();
         if (player == null) return;
 
         // Add chance (1 = 10%, 2 = 20% ... 10 = 100%)

@@ -1,70 +1,40 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using System.Collections;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LightToggle : MonoBehaviour
 {
     [Header("Refs")]
     [SerializeField] private Light2D light2D;
 
-    private PlayerInput playerInput;
-    private InputAction attackAction;
-
     [Header("Fuel")]
-    public float maxFuel = 100f;
-    public float fuel = 100f;
-    public float drainPerSecond = 5f;
+    [SerializeField] private float maxFuel = 100f;
+    [SerializeField] private float fuel = 100f;
+    [SerializeField] private float drainPerSecond = 5f;
 
     [Header("State")]
-    public bool isOn = false;
+    [SerializeField] private bool isOn = false;
 
     [Header("Toby")]
-    public GameObject walkSound;
+    [SerializeField] private GameObject walkSound;
 
-
-
-  
-
-
-    
     private CircleCollider2D lightTrigger;
-      private PlayerController pc;
+    private PlayerNoise noise;
 
-    void Awake()
+    private void Awake()
     {
-        isOn = false;
-        pc = GetComponent<PlayerController>();
-
+        noise = GetComponent<PlayerNoise>();
         lightTrigger = GetComponent<CircleCollider2D>();
-        playerInput = GetComponent<PlayerInput>();
 
         if (light2D == null)
             light2D = GetComponentInChildren<Light2D>(true);
-    }
 
-    IEnumerator Start()
-    {
-        yield return null;
-
-        attackAction = playerInput.currentActionMap.FindAction("Attack", true);
-        attackAction.performed += OnAttack;
-        attackAction.Enable();
-
+        isOn = false;
         ApplyLightState();
     }
 
-    void OnDisable()
-    {
-        if (attackAction != null)
-        {
-            attackAction.performed -= OnAttack;
-            attackAction.Disable();
-        }
-    }
-
-    void Update()
+    private void Update()
     {
         if (!isOn) return;
 
@@ -74,18 +44,20 @@ public class LightToggle : MonoBehaviour
         {
             fuel = 0f;
             isOn = false;
-            ApplyLightState();   
-             walkSound.SetActive(true);
-            StartCoroutine(gameOverMan());        
+            ApplyLightState();
+
+            if (walkSound != null)
+                walkSound.SetActive(true);
+
+            StartCoroutine(GameOverMan());
         }
-        
     }
 
-    private void OnAttack(InputAction.CallbackContext ctx)
+    // ✅ Called by PlayerBrain when Attack is pressed
+    public void Toggle()
     {
         // Don't turn on if no fuel
-        if (!isOn && fuel <= 0f)
-            return;
+        if (!isOn && fuel <= 0f) return;
 
         isOn = !isOn;
         ApplyLightState();
@@ -106,28 +78,24 @@ public class LightToggle : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-{
-    if (!isOn) return;
-
-    if (other.CompareTag("teddy") && pc != null)
     {
-        pc.noiseLevel = pc.maxNoise;
+        if (!isOn) return;
+
+        if (other.CompareTag("teddy"))
+            noise?.SetNoiseToMax();
     }
-}
 
-private void OnTriggerStay2D(Collider2D other)
-{
-    if (!isOn) return;
-
-    if (other.CompareTag("teddy") && pc != null)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        pc.noiseLevel = pc.maxNoise;
-    }
-}
+        if (!isOn) return;
 
-IEnumerator gameOverMan()
-{
+        if (other.CompareTag("teddy"))
+            noise?.SetNoiseToMax();
+    }
+
+    private IEnumerator GameOverMan()
+    {
         yield return new WaitForSecondsRealtime(15f);
-        SceneManager.LoadScene("GameOver");}
-
+        SceneManager.LoadScene("GameOver");
+    }
 }

@@ -13,7 +13,7 @@ public class BlueKeyCard : MonoBehaviour, IInteractable
         MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         CineMachine = GameObject.FindGameObjectWithTag("CineMachine");
     }
-    public void Interact(PlayerController player)
+    public void Interact(PlayerBrain player)
     {
         
         DontDestroyOnLoad(Player);

@@ -9,7 +9,7 @@ public class mainEntranceDoor : MonoBehaviour, IInteractable
 
 
 
-    public void Interact(PlayerController player)
+    public void Interact(PlayerBrain player)
     {
         if( player.redKeyCard && player.yellowKeyCard && player.blueKeyCard)
         {

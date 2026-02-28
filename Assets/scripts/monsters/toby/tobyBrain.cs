@@ -1,85 +1,82 @@
-
 using UnityEngine;
-using UnityEngine.AdaptivePerformance;
 
 public class tobyBrain : MonoBehaviour
 {
     private tobyPatrol patrol;
     private GridChase2D chase;
-    private PlayerController player;
+    private PlayerNoise playerNoise;
 
     private GameObject pathSystem;
     private PathGrid grid;
-    private float despawnTimer =0f;
-    private const float DESPAWN_TIME = 60F;
+
+    private float despawnTimer = 0f;
+    private const float DESPAWN_TIME = 60f;
 
     private AudioSource audioSource;
     private float randomSoundChance = 50f;
     private float randomSoundInterval = 25f;
-
     private float soundTimer = 0f;
 
     [SerializeField] private AudioClip[] tobySounds;
 
     [Range(0.1f, 0.99f)]
-    private float returnPercent = 0.8f;
-    
+    [SerializeField] private float returnPercent = 0.8f;
 
     private bool isChasing;
 
-    
     void Awake()
     {
-      
         audioSource = GetComponent<AudioSource>();
         patrol = GetComponent<tobyPatrol>();
         chase  = GetComponent<GridChase2D>();
 
-        player = FindFirstObjectByType<PlayerController>();
+        playerNoise = FindFirstObjectByType<PlayerNoise>();
 
-        
         pathSystem = GameObject.Find("PathfindingSystem");
         if (pathSystem != null)
             grid = pathSystem.GetComponent<PathGrid>();
 
         SetChase(false);
-
-
     }
 
     void Update()
     {
-        if (player == null) return;
+        // If player object got destroyed / scene swapped, try to reacquire
+        if (playerNoise == null)
+        {
+            playerNoise = FindFirstObjectByType<PlayerNoise>();
+            return;
+        }
 
-        float chaseThreshold  = player.maxNoise;
-        float returnThreshold = player.maxNoise * returnPercent;
+        float chaseThreshold  = playerNoise.MaxNoise;              
+        float returnThreshold = playerNoise.MaxNoise * returnPercent; 
 
-        if (!isChasing && player.noiseLevel >= chaseThreshold)
+        float noiseNow = playerNoise.CurrentNoise; 
+
+        if (!isChasing && noiseNow >= chaseThreshold)
             SetChase(true);
-        else if (isChasing && player.noiseLevel <= returnThreshold)
+        else if (isChasing && noiseNow <= returnThreshold)
             SetChase(false);
 
         if (!isChasing)
         {
             despawnTimer += Time.deltaTime;
-
             if (despawnTimer >= DESPAWN_TIME)
-            {
                 Destroy(gameObject);
-            }
-            
+        }
+        else
+        {
+
+            despawnTimer = 0f;
         }
 
-                soundTimer += Time.deltaTime;
+        soundTimer += Time.deltaTime;
         if (soundTimer >= randomSoundInterval)
         {
             soundTimer = 0f;
             float roll = Random.Range(0f, 100f);
-
-            if(roll <= randomSoundChance)
-            {
-                playRandom();
-            }
+            if (roll <= randomSoundChance)
+                PlayRandom();
         }
     }
 
@@ -90,35 +87,29 @@ public class tobyBrain : MonoBehaviour
         if (patrol) patrol.enabled = !value;
         if (chase)  chase.enabled  = value;
 
-        
         if (pathSystem != null)
         {
             pathSystem.SetActive(value);
 
-         
             if (value && grid != null)
                 grid.Build();
         }
 
-        // When returning to patrol, re-sync to nearest waypoint
         if (!value && patrol != null)
             patrol.ResetToClosestWaypoint();
     }
 
-    void playRandom()
+    void PlayRandom()
     {
-    if (audioSource == null)
-    {
-        audioSource = GetComponent<AudioSource>();
+        if (tobySounds == null || tobySounds.Length == 0) return;
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
+
+        int index = Random.Range(0, tobySounds.Length);
+        AudioClip clip = tobySounds[index];
+
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+        audioSource.PlayOneShot(clip, 1f);
     }
-
-
-    int index = Random.Range(0, tobySounds.Length);
-
-    AudioClip clip = tobySounds[index];
-    
-
-    audioSource.pitch = Random.Range(0.95f, 1.05f);
-    audioSource.PlayOneShot(clip, 1f);
-}
 }

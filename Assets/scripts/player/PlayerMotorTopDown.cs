@@ -3,9 +3,18 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMotorTopDown : MonoBehaviour
 {
-    [Header("Speed")]
+   [Header("Speed")]
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 10f;
+
+    [Header("Stamina")]
+    [SerializeField] private float maxStamina = 100f;
+    [SerializeField] private float staminaDrainPerSecond = 15f;
+    [SerializeField] private float staminaGainPerSecond = 10f;
+
+    [Header("Debug (Read Only)")]
+    [SerializeField] private float stamina; 
+    public float StaminaRaw => stamina;
 
     public int facingDirection = 1;
 
@@ -18,6 +27,7 @@ public class PlayerMotorTopDown : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         brain = GetComponent<PlayerBrain>();
         playerNoise = GetComponent<PlayerNoise>();
+        stamina = maxStamina;
     }
 
     private void OnEnable()
@@ -28,20 +38,30 @@ public class PlayerMotorTopDown : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (brain == null) return;
+          if (brain == null) return;
 
-        float speed = brain.SprintHeld ? runSpeed : walkSpeed;
-        Vector2 v = brain.MoveInput * speed;
+        bool moving = brain.MoveInput.sqrMagnitude > 0.001f;
 
-        rb.linearVelocity = v;
+        // Can sprint only if holding sprint, moving, and have stamina
+        bool canSprint = brain.SprintHeld && moving && stamina > 5f;
 
-        // Send movement info to noise system
-        if (playerNoise != null && brain.MoveInput.sqrMagnitude > 0.001f)
-        {
-            playerNoise.AddMovementNoise(brain.SprintHeld, Time.fixedDeltaTime);
-        }
+        // Drain/regen stamina
+        if (canSprint)
+            stamina -= staminaDrainPerSecond * Time.fixedDeltaTime;
+        else
+            stamina += staminaGainPerSecond * Time.fixedDeltaTime;
 
-        // Flip by x direction only
+        stamina = Mathf.Clamp(stamina, 0f, maxStamina);
+
+        // Speed based on stamina-allowed sprint
+        float speed = canSprint ? runSpeed : walkSpeed;
+        rb.linearVelocity = brain.MoveInput * speed;
+
+        // Noise
+        if (playerNoise != null && moving)
+            playerNoise.AddMovementNoise(canSprint, Time.fixedDeltaTime);
+
+        
         if (brain.MoveInput.x > 0.01f && transform.localScale.x < 0f) Flip();
         else if (brain.MoveInput.x < -0.01f && transform.localScale.x > 0f) Flip();
     }

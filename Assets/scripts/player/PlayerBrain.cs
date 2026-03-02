@@ -38,11 +38,16 @@ public class PlayerBrain : MonoBehaviour
         lightToggle = GetComponent<LightToggle>();
     }
 
+
     private void OnEnable()
     {
         StartCoroutine(BindInputNextFrame());
     }
 
+    public void ReStartPlayerControls()
+        {
+        StartCoroutine(BindInputNextFrame());
+    }
     private IEnumerator BindInputNextFrame()
     {
         yield return null; 

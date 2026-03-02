@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections;
 
 public class pauseScreen : MonoBehaviour
 {
@@ -9,14 +10,14 @@ public class pauseScreen : MonoBehaviour
 
     private Button exitButton;
 
-    void Start()
+    void OnEnable()
     {
         uiDocument = GetComponent<UIDocument>();
         var root = uiDocument.rootVisualElement;
        
         exitButton = root.Q<Button>("exitLabel");
 
-        
+        exitButton.clicked -= OnExitClicked;
         exitButton.clicked += OnExitClicked;
 
         
@@ -27,8 +28,14 @@ public class pauseScreen : MonoBehaviour
     private void OnExitClicked()
     {
        
-        Invoke(nameof(LoadQuit), 1f);
+        StartCoroutine(QuitAfterDelay());
        
+    }
+
+        private IEnumerator QuitAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(1f); // works even when timeScale = 0
+        LoadQuit();
     }
 
     private void LoadQuit()

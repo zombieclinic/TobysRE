@@ -2,36 +2,42 @@ using UnityEngine;
 
 public class PlayerNoise : MonoBehaviour
 {
-    [Header("Noise Settings")]
+    [Header("Noise Limits")]
     [SerializeField] private float maxNoise = 100f;
+
+    [Header("Decay")]
     [SerializeField] private float decayPerSecond = 15f;
 
-    public float CurrentNoise { get; private set; }
+    [Header("Movement Noise Gain")]
+    [SerializeField] private float moveNoisePerSecond = 10f;
+    [SerializeField] private float sprintNoisePerSecond = 20f;
 
+    [Header("Debug (Read Only)")]
+    [SerializeField] private float currentNoise; // <- visible in Inspector
+
+    public float CurrentNoise => currentNoise;
     public float MaxNoise => maxNoise;
 
-    void Update()
+    private void Update()
     {
-        // Always decay over time
-        if (CurrentNoise > 0f)
+        if (currentNoise > 0f)
         {
-            CurrentNoise -= decayPerSecond * Time.deltaTime;
-            CurrentNoise = Mathf.Clamp(CurrentNoise, 0f, maxNoise);
+            currentNoise -= decayPerSecond * Time.deltaTime;
+            currentNoise = Mathf.Clamp(currentNoise, 0f, maxNoise);
         }
+    }
+
+    public void AddMovementNoise(bool sprinting, float deltaTime)
+    {
+        float gain = sprinting ? sprintNoisePerSecond : moveNoisePerSecond;
+        currentNoise = Mathf.Clamp(currentNoise + gain * deltaTime, 0f, maxNoise);
     }
 
     public void AddNoise(float amount)
     {
-        CurrentNoise = Mathf.Clamp(CurrentNoise + amount, 0f, maxNoise);
+        currentNoise = Mathf.Clamp(currentNoise + amount, 0f, maxNoise);
     }
 
-    public void SetNoiseToMax()
-    {
-        CurrentNoise = maxNoise;
-    }
-
-    public void ClearNoise()
-    {
-        CurrentNoise = 0f;
-    }
+    public void SetNoiseToMax() => currentNoise = maxNoise;
+    public void ClearNoise() => currentNoise = 0f;
 }

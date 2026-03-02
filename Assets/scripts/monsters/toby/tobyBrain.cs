@@ -4,6 +4,10 @@ public class tobyBrain : MonoBehaviour
 {
     private tobyPatrol patrol;
     private GridChase2D chase;
+    [Header("Hearing")]
+    [SerializeField] private float chaseNoiseThreshold = 25f;
+    [Range(0.1f, 0.99f)]
+    [SerializeField] private float returnPercent = 0.8f;
     private PlayerNoise playerNoise;
 
     private GameObject pathSystem;
@@ -18,9 +22,6 @@ public class tobyBrain : MonoBehaviour
     private float soundTimer = 0f;
 
     [SerializeField] private AudioClip[] tobySounds;
-
-    [Range(0.1f, 0.99f)]
-    [SerializeField] private float returnPercent = 0.8f;
 
     private bool isChasing;
 
@@ -41,17 +42,17 @@ public class tobyBrain : MonoBehaviour
 
     void Update()
     {
-        // If player object got destroyed / scene swapped, try to reacquire
+        
         if (playerNoise == null)
         {
             playerNoise = FindFirstObjectByType<PlayerNoise>();
             return;
         }
 
-        float chaseThreshold  = playerNoise.MaxNoise;              
-        float returnThreshold = playerNoise.MaxNoise * returnPercent; 
+        float chaseThreshold  = chaseNoiseThreshold;
+        float returnThreshold = chaseNoiseThreshold * returnPercent;
 
-        float noiseNow = playerNoise.CurrentNoise; 
+        float noiseNow = playerNoise.CurrentNoise;
 
         if (!isChasing && noiseNow >= chaseThreshold)
             SetChase(true);

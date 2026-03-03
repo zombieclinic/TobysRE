@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 71232790}
   - component: {fileID: 71232789}
   - component: {fileID: 71232791}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,6 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eb889ecd2792c46902246953c4c864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::startBlueGame
+  gravity: 3
 --- !u!1 &404136652
 GameObject:
   m_ObjectHideFlags: 0

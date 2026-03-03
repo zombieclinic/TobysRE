@@ -11,6 +11,14 @@ public class playerSideWalk : MonoBehaviour
     [SerializeField] private float staminaDrainPerSecond = 15f;
     [SerializeField] private float staminaGainPerSecond = 10f;
 
+    [Header("Jump")]
+    [SerializeField] private float jumpForced = 12f;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius = 0.15f;
+    [SerializeField] private LayerMask groundLayer;
+
+    private bool wasJumpHeld;
+
     [Header("Debug (Read Only)")]
     [SerializeField] private float stamina; 
     public float StaminaRaw => stamina;
@@ -58,6 +66,17 @@ public class playerSideWalk : MonoBehaviour
        
         rb.linearVelocity = new Vector2(moveX * speed, rb.linearVelocity.y);
 
+        // jump
+        bool grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        bool jumpPressedNow = brain.JumpPressed;
+        if(jumpPressedNow && !wasJumpHeld && grounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.AddForce(Vector2.up * jumpForced, ForceMode2D.Impulse);
+        }
+        wasJumpHeld = jumpPressedNow;
+        Debug.Log($"JumpPressed={brain.JumpPressed} grounded={grounded}");
         // Noise
         if (playerNoise != null && moving)
             playerNoise.AddMovementNoise(canSprint, Time.fixedDeltaTime);
@@ -74,4 +93,11 @@ public class playerSideWalk : MonoBehaviour
         s.x *= -1;
         transform.localScale = s;
     }
+
+    private void OnDrawGizmosSelected()
+{
+    if (groundCheck == null) return;
+    Gizmos.color = Color.green;
+    Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+}
 }

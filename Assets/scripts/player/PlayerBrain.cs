@@ -27,6 +27,7 @@ public class PlayerBrain : MonoBehaviour
     private InputAction interactAction;
     private InputAction pauseAction;
     private InputAction attackAction;
+    private InputAction jumpAction;
     private LightToggle lightToggle;
 
     private PlayerInteractor interactor;
@@ -62,6 +63,7 @@ public class PlayerBrain : MonoBehaviour
         interactAction = playerInput.currentActionMap.FindAction("Interact", true);
         pauseAction = playerInput.currentActionMap.FindAction("Pause", true);
         attackAction = playerInput.currentActionMap.FindAction("Attack", true);
+        jumpAction = playerInput.currentActionMap.FindAction("Jump", true);
 
         
         Unbind();
@@ -83,6 +85,10 @@ public class PlayerBrain : MonoBehaviour
 
         attackAction.performed += OnAttack;
         attackAction.Enable();
+
+        jumpAction.performed += OnJump;
+        jumpAction.canceled += OnJump;
+        jumpAction.Enable();
     }
 
     private void OnDisable()
@@ -117,8 +123,20 @@ public class PlayerBrain : MonoBehaviour
             pauseAction.performed -= OnPause;
             pauseAction.Disable();
         }
+
+        if (jumpAction != null)
+        {
+            jumpAction.performed -= OnJump;
+            jumpAction.canceled -= OnJump;
+            jumpAction.Disable();
+        }
     }
 
+    private void OnJump(InputAction.CallbackContext ctx)
+    {
+        JumpPressed = ctx.ReadValue<float>() > 0.1f;
+        Debug.Log("JumpPressed");
+    }
 
     private void OnMove(InputAction.CallbackContext ctx)
     {

@@ -135,7 +135,7 @@ public class PlayerBrain : MonoBehaviour
     private void OnJump(InputAction.CallbackContext ctx)
     {
         JumpPressed = ctx.ReadValue<float>() > 0.1f;
-        Debug.Log("JumpPressed");
+        
     }
 
     private void OnMove(InputAction.CallbackContext ctx)

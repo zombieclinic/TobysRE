@@ -16,6 +16,7 @@ public class playerSideWalk : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.15f;
     [SerializeField] private LayerMask groundLayer;
+    private Animator animator;
 
     private bool wasJumpHeld;
 
@@ -31,6 +32,7 @@ public class playerSideWalk : MonoBehaviour
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         brain = GetComponent<PlayerBrain>();
         playerNoise = GetComponent<PlayerNoise>();
@@ -39,9 +41,12 @@ public class playerSideWalk : MonoBehaviour
 
     private void OnEnable()
     {
-       
         rb.linearVelocity = Vector2.zero;
+        wasJumpHeld = false;
+        animator.ResetTrigger("JumpStart");
+        
     }
+
 
     private void FixedUpdate()
     {
@@ -68,36 +73,43 @@ public class playerSideWalk : MonoBehaviour
 
         // jump
         bool grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        animator.SetBool("Grounded", grounded);
+        animator.SetFloat("YVel", rb.linearVelocity.y);
 
         bool jumpPressedNow = brain.JumpPressed;
-        if(jumpPressedNow && !wasJumpHeld && grounded)
+
+        if (jumpPressedNow && !wasJumpHeld && grounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForced, ForceMode2D.Impulse);
+            animator.SetTrigger("JumpStart"); 
+            animator.SetBool("Grounded", false);
+            
         }
-        wasJumpHeld = jumpPressedNow;
-        Debug.Log($"JumpPressed={brain.JumpPressed} grounded={grounded}");
-        // Noise
-        if (playerNoise != null && moving)
-            playerNoise.AddMovementNoise(canSprint, Time.fixedDeltaTime);
 
+        wasJumpHeld = jumpPressedNow;
         
+         // Noise
+        if (playerNoise != null && moving)
+                playerNoise.AddMovementNoise(canSprint, Time.fixedDeltaTime);
+
+            
         if (brain.MoveInput.x > 0.01f && transform.localScale.x < 0f) Flip();
         else if (brain.MoveInput.x < -0.01f && transform.localScale.x > 0f) Flip();
-    }
+        }
 
-    private void Flip()
+        private void Flip()
+        {
+            facingDirection *= -1;
+            Vector3 s = transform.localScale;
+            s.x *= -1;
+            transform.localScale = s;
+        }
+
+        private void OnDrawGizmosSelected()
     {
-        facingDirection *= -1;
-        Vector3 s = transform.localScale;
-        s.x *= -1;
-        transform.localScale = s;
+        if (groundCheck == null) return;
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
-
-    private void OnDrawGizmosSelected()
-{
-    if (groundCheck == null) return;
-    Gizmos.color = Color.green;
-    Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-}
 }

@@ -53,7 +53,7 @@ public class LightToggle : MonoBehaviour
         }
     }
 
-    // ✅ Called by PlayerBrain when Attack is pressed
+    
     public void Toggle()
     {
         // Don't turn on if no fuel

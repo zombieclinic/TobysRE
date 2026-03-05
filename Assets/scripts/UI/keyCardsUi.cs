@@ -15,7 +15,10 @@ public class keyCardsUi : MonoBehaviour
     private Image RedPic;
     private Image BluePic;
 
-     
+    void Awake()
+    {
+        player = GetComponent<PlayerBrain>();
+    }
     void Start()
     {
         var root = uiDocument.rootVisualElement;
@@ -31,8 +34,9 @@ public class keyCardsUi : MonoBehaviour
 
        void Update()
     {
-        if (player == null) return;
-
+    SetVisible(YellowPic, player.yellowKeyCard);
+    SetVisible(RedPic, player.redKeyCard);
+    SetVisible(BluePic, player.blueKeyCard);
        
     }
 

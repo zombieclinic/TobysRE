@@ -5,6 +5,7 @@ public class startBlueGame : MonoBehaviour
 {
    private PlayerMotorTopDown topControls;
     private playerSideWalk sideControls;
+    private LightToggle lightControl;
     public float gravity = 3;
 
     void Start()
@@ -15,7 +16,8 @@ public class startBlueGame : MonoBehaviour
             rb.gravityScale = gravity;
             player.transform.position = new Vector3(-7.4f,3.8f, 0f);
             
-
+        lightControl = player.GetComponent<LightToggle>();
+        lightControl.enabled = false;
               
         topControls = player.GetComponent<PlayerMotorTopDown>();
         topControls.enabled = false;

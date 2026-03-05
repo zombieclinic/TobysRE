@@ -173,7 +173,8 @@ public class PlayerBrain : MonoBehaviour
 {
     if(paused == true) return;
     if (!ctx.performed) return;
-    lightToggle?.Toggle();
+    if (lightToggle != null && lightToggle.isActiveAndEnabled)
+        lightToggle.Toggle();
 }
 
     public void GiveRedKey() => redKeyCard = true;

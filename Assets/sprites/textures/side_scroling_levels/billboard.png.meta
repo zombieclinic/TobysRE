@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3f333696a00a44947a4f7b246db725ff
+guid: 7ad6df9348cd13744947c98ae6a9c8f0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8956489288767354140
-    second: pipe_2_0
+      213: 2723576893817509615
+    second: billboard_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,29 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pipe_2_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4ea4e64027824b380800000000000000
-      internalID: -8956489288767354140
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pipe_2_1
+      name: billboard_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,10 +113,32 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe6547a31c61cc520800000000000000
+      internalID: 2723576893817509615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: billboard_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da6629bcf5f510846ab0b00cc63c82df
-      internalID: -162363852
+      spriteID: 9741487cfbfbb3d4a8158d235ef73333
+      internalID: 733973533
       vertices: []
       indices: 
       edges: []
@@ -147,7 +147,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 48bc389f053dd5c4793157afc3209b22
+    spriteID: 518309fccc594d54f91bb0b4f4656d36
     internalID: 0
     vertices: []
     indices: 
@@ -159,8 +159,8 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      pipe_2_0: -8956489288767354140
-      pipe_2_1: -162363852
+      billboard_0: 2723576893817509615
+      billboard_1: 733973533
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

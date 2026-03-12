@@ -16,18 +16,11 @@ public class tobyBrain : MonoBehaviour
     private float despawnTimer = 0f;
     private const float DESPAWN_TIME = 60f;
 
-    private AudioSource audioSource;
-    private float randomSoundChance = 50f;
-    private float randomSoundInterval = 25f;
-    private float soundTimer = 0f;
-
-    [SerializeField] private AudioClip[] tobySounds;
 
     private bool isChasing;
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
         patrol = GetComponent<tobyPatrol>();
         chase  = GetComponent<GridChase2D>();
 
@@ -71,14 +64,6 @@ public class tobyBrain : MonoBehaviour
             despawnTimer = 0f;
         }
 
-        soundTimer += Time.deltaTime;
-        if (soundTimer >= randomSoundInterval)
-        {
-            soundTimer = 0f;
-            float roll = Random.Range(0f, 100f);
-            if (roll <= randomSoundChance)
-                PlayRandom();
-        }
     }
 
     void SetChase(bool value)
@@ -98,19 +83,5 @@ public class tobyBrain : MonoBehaviour
 
         if (!value && patrol != null)
             patrol.ResetToClosestWaypoint();
-    }
-
-    void PlayRandom()
-    {
-        if (tobySounds == null || tobySounds.Length == 0) return;
-
-        if (audioSource == null)
-            audioSource = GetComponent<AudioSource>();
-
-        int index = Random.Range(0, tobySounds.Length);
-        AudioClip clip = tobySounds[index];
-
-        audioSource.pitch = Random.Range(0.95f, 1.05f);
-        audioSource.PlayOneShot(clip, 1f);
     }
 }

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &52351956628500969
 Transform:
   m_ObjectHideFlags: 0
@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 1930382853589116422}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2596088632182221884, guid: a6042e473b3e1da42a6a0e9bb4e3b6ce, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 269148b457aaffa449ca14f9078087b9, type: 3}
   m_PlayOnAwake: 1
@@ -54,9 +54,9 @@ AudioSource:
   Priority: 87
   DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 6
   Pan2D: -0.02
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -64,23 +64,41 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.2
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -5.0019917
+      outSlope: -5.0019917
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      time: 0.4
+      value: 0.5
+      inSlope: -1.2504979
+      outSlope: -1.2504979
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.8
+      value: 0.25
+      inSlope: -0.31262448
+      outSlope: -0.31262448
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.980896
+      value: 0
+      inSlope: -0.20007975
+      outSlope: -0.20007975
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -89,7 +107,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.186
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -382,6 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::tobyAnimDriver
   facingDirection: 1
+  walkSound: {fileID: 1930382853589116422}
 --- !u!114 &-8105261184559152980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,10 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0838d1679db41214f9bff72c706b92c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::tobyBrain
-  tobySounds:
-  - {fileID: 8300000, guid: 767675ca73446c04b90dba7f898d4cdb, type: 3}
-  - {fileID: 8300000, guid: bac1f65be84aab14aad6690e756564fe, type: 3}
-  - {fileID: 8300000, guid: e1f8e43b1ef98ac4bab1601abad7d470, type: 3}
+  chaseNoiseThreshold: 25
+  returnPercent: 0.8
 --- !u!114 &4844704453830233084
 MonoBehaviour:
   m_ObjectHideFlags: 0

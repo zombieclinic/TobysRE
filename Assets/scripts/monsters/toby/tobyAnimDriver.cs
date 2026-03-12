@@ -5,7 +5,7 @@ public class tobyAnimDriver : MonoBehaviour
     private Animator animator;
     public int facingDirection = 1;
     private Vector2 lastDir = Vector2.down;
-    private GameObject walkSound;
+    [SerializeField] private GameObject walkSound;
     private float hearDistance = 10f;
     private Vector2 soundPointOffSet = Vector2.zero;
 
@@ -15,9 +15,8 @@ public class tobyAnimDriver : MonoBehaviour
     {
         GameObject target = GameObject.FindGameObjectWithTag("Player");
         if(target != null) player = target.transform;
-        walkSound = GameObject.Find("walkSound");
         animator = GetComponent<Animator>();
-        walkSound.SetActive(false);
+        walkSound.SetActive(true);
     }
 
 

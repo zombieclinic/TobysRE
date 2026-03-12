@@ -35,17 +35,20 @@ public class PauseScreen : MonoBehaviour
         if (masterSlider != null)
         {
             masterSlider.UnregisterValueChangedCallback(OnMasterVolumeChanged);
+            masterSlider.SetValueWithoutNotify(mixer.GetMasterVolume());
             masterSlider.RegisterValueChangedCallback(OnMasterVolumeChanged);
         }
 
         if (SFXSlider != null)
         {
             SFXSlider.UnregisterValueChangedCallback(OnSFXVolumeChanged);
+            SFXSlider.SetValueWithoutNotify(mixer.GetSFXVolume());
             SFXSlider.RegisterValueChangedCallback(OnSFXVolumeChanged);
         }
         if (MusicSlider != null)
         {
             MusicSlider.UnregisterValueChangedCallback(OnMusicChanged);
+            MusicSlider.SetValueWithoutNotify(mixer.GetMusicVolume());
             MusicSlider.RegisterValueChangedCallback(OnMusicChanged);
         }
     }
@@ -59,7 +62,7 @@ public class PauseScreen : MonoBehaviour
             masterSlider.UnregisterValueChangedCallback(OnMasterVolumeChanged);
 
         if (SFXSlider != null)
-            SFXSlider.UnregisterValueChangedCallback(OnMasterVolumeChanged);
+            SFXSlider.UnregisterValueChangedCallback(OnSFXVolumeChanged);
         
         if (MusicSlider != null)
             MusicSlider.UnregisterValueChangedCallback(OnMusicChanged);

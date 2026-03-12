@@ -7,12 +7,16 @@ public static SoundEffectManager instance;
 [SerializeField] private AudioSource soundFXObject;
 
     void Awake()
+{
+    if (instance == null)
     {
-        if (instance = null)
-        {
-            instance = this;
-        }
+        instance = this;
     }
+    else
+    {
+        Destroy(gameObject);
+    }
+}
 
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {

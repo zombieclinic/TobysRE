@@ -7,6 +7,7 @@ public class LightToggle : MonoBehaviour
 {
     [Header("Refs")]
     [SerializeField] private Light2D light2D;
+     [SerializeField] private BatteryBar batteryBar;
 
     [Header("Fuel")]
     [SerializeField] private float maxFuel = 100f;
@@ -32,6 +33,12 @@ public class LightToggle : MonoBehaviour
 
         isOn = false;
         ApplyLightState();
+
+        if (batteryBar != null)
+        {
+            batteryBar.SetMaxPower(maxFuel);
+            batteryBar.SetBatteryPower(fuel);
+        }
     }
 
     private void Update()
@@ -39,6 +46,10 @@ public class LightToggle : MonoBehaviour
         if (!isOn) return;
 
         fuel -= drainPerSecond * Time.deltaTime;
+        fuel = Mathf.Clamp(fuel, 0f, maxFuel);
+
+        if (batteryBar != null)
+            batteryBar.SetBatteryPower(fuel);
 
         if (fuel <= 0f)
         {
@@ -75,6 +86,8 @@ public class LightToggle : MonoBehaviour
     public void AddFuel(float amount)
     {
         fuel = Mathf.Clamp(fuel + amount, 0f, maxFuel);
+         if (batteryBar != null)
+            batteryBar.SetBatteryPower(fuel);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

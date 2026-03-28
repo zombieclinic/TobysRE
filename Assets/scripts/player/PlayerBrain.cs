@@ -123,6 +123,11 @@ public class PlayerBrain : MonoBehaviour
             pauseAction.performed -= OnPause;
             pauseAction.Disable();
         }
+        if (attackAction != null)
+        {
+            attackAction.performed -= OnAttack;
+            attackAction.Disable();
+        }
 
         if (jumpAction != null)
         {
@@ -167,6 +172,15 @@ public class PlayerBrain : MonoBehaviour
 
         if (pauseMenu != null)
             pauseMenu.SetActive(paused);
+
+        if (!paused)
+        {
+            MoveInput = Vector2.zero;
+            SprintHeld = false;
+            JumpPressed = false;
+
+            ReStartPlayerControls();
+        }
     }
 
     private void OnAttack(InputAction.CallbackContext ctx)

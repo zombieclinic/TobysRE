@@ -95,22 +95,6 @@ SaveTrapdoorState(true);
             Debug.LogWarning("No scene assigned for " + gameObject.name);
         }
 
-        switch (color)
-        {
-            case TrapdoorColor.Red:
-                Debug.LogError("RedCard is Loaded");
-                
-                break;
-            case TrapdoorColor.Blue:
-                DontDestroyOnLoad(Player);
-                DontDestroyOnLoad(MainCamera);
-                DontDestroyOnLoad(CineMachine);
-                SceneManager.LoadScene("blueCardKeyGame");
-                break;
-            case TrapdoorColor.Yellow:
-                Debug.LogError("YellowCard is Loaded");
-                break;
-        }
     }
 
     private void SaveTrapdoorState(bool open)

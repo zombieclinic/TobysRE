@@ -79,8 +79,8 @@ public class trapdoor_keycard : MonoBehaviour, IInteractable
             IsOpen = true;
             sr.sprite = Open;
 
-          SaveTrapdoorState(true);
-        }
+SaveTrapdoorState(true);
+        }          
 
         if (Player != null) DontDestroyOnLoad(Player);
         if (MainCamera != null) DontDestroyOnLoad(MainCamera);
@@ -94,23 +94,42 @@ public class trapdoor_keycard : MonoBehaviour, IInteractable
         {
             Debug.LogWarning("No scene assigned for " + gameObject.name);
         }
+
+        switch (color)
+        {
+            case TrapdoorColor.Red:
+                Debug.LogError("RedCard is Loaded");
+                
+                break;
+            case TrapdoorColor.Blue:
+                DontDestroyOnLoad(Player);
+                DontDestroyOnLoad(MainCamera);
+                DontDestroyOnLoad(CineMachine);
+                SceneManager.LoadScene("blueCardKeyGame");
+                break;
+            case TrapdoorColor.Yellow:
+                Debug.LogError("YellowCard is Loaded");
+                break;
+        }
     }
 
     private void SaveTrapdoorState(bool open)
-{
-    switch (color)
     {
-        case TrapdoorColor.Red:
-            GameManager.Instance.redTrapdoorOpen = open;
-            break;
+    switch (color)
+        {
+            case TrapdoorColor.Red:
+                GameManager.Instance.redTrapdoorOpen = open;
+                break;
 
-        case TrapdoorColor.Blue:
-            GameManager.Instance.blueTrapdoorOpen = open;
-            break;
+            case TrapdoorColor.Blue:
+                GameManager.Instance.blueTrapdoorOpen = open;
+                break;
 
-        case TrapdoorColor.Yellow:
-            GameManager.Instance.yellowTrapdoorOpen = open;
-            break;
+            case TrapdoorColor.Yellow:
+                GameManager.Instance.yellowTrapdoorOpen = open;
+                break;
+        }
+
+        
     }
-}
 }

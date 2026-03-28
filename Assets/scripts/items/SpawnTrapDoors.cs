@@ -2,8 +2,10 @@ using System.Linq;
 using UnityEngine;
 
 
-public class keycards : MonoBehaviour
+public class SpawnTrapDoors : MonoBehaviour
 {
+
+
     private Transform[] spawnPoints;
     public Transform keycardChancesParent;
 

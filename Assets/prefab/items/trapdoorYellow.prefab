@@ -107,9 +107,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::trapdoor_keycard
   Open: {fileID: 21300000, guid: 4a2d114404c5df744a0e5e0b4d942b4c, type: 3}
   Closed: {fileID: 21300000, guid: 1fbbf93a35708d740ab468e1e7abab96, type: 3}
-  red: 0
-  blue: 0
-  yellow: 1
+  color: 2
+  sceneToLoad: 
 --- !u!61 &8549621542503463797
 BoxCollider2D:
   m_ObjectHideFlags: 0

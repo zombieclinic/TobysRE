@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public class batterySpawn : MonoBehaviour
 {
     [SerializeField] private PathGrid pathGrid;
@@ -10,8 +11,25 @@ public class batterySpawn : MonoBehaviour
     private List<Node> availableNodes = new List<Node>();
     void Start()
     {
-        BuildNodeList();
-        SpawnItems();
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager.Instance is null");
+            return;
+        }
+
+        if (pathGrid == null)
+        {
+            Debug.LogError("PathGrid is missing");
+            return;
+        }
+
+        if(!GameManager.Instance.batteriesGenerated)
+        {
+            BuildNodeList();
+            GenerateAndSaveBatterySpawns();
+        }
+
+        RespawnSavedBatteries();
     }
 
     void BuildNodeList()
@@ -31,8 +49,9 @@ public class batterySpawn : MonoBehaviour
         }
     }
 
-     void SpawnItems()
+    void GenerateAndSaveBatterySpawns()
     {
+        List<Vector3> spawnPositions = new List<Vector3>();
         int spawnCount = Mathf.Min(amountToSpawn, availableNodes.Count);
 
         for (int i = 0; i < spawnCount; i++)
@@ -40,9 +59,31 @@ public class batterySpawn : MonoBehaviour
             int index = Random.Range(0, availableNodes.Count);
             Node node = availableNodes[index];
 
-            Instantiate(Battery, node.worldPos, Quaternion.identity);
-
+            spawnPositions.Add(node.worldPos);
             availableNodes.RemoveAt(index);
+        }
+
+        GameManager.Instance.SaveBatterySpawns(spawnPositions);
+    }
+
+     void RespawnSavedBatteries()
+    {
+        for (int i = 0; i < GameManager.Instance.batteryData.Count; i++)
+        {
+            if (!GameManager.Instance.batteryData[i].pickedUp)
+            {
+                GameObject battery = Instantiate(
+                    Battery,
+                    GameManager.Instance.batteryData[i].position,
+                    Quaternion.identity
+                );
+
+                BatteryPickup pickup = battery.GetComponent<BatteryPickup>();
+                if (pickup != null)
+                {
+                    pickup.SetBatteryIndex(i);
+                }
+            }
         }
     }
 }

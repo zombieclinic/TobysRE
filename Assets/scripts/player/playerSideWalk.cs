@@ -16,6 +16,8 @@ public class playerSideWalk : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.15f;
     [SerializeField] private LayerMask groundLayer;
+
+    
     private Animator animator;
 
     private bool wasJumpHeld;
@@ -30,8 +32,18 @@ public class playerSideWalk : MonoBehaviour
     private PlayerBrain brain;
     private PlayerNoise playerNoise;
 
+    
+    [Header("Ladder")]
+    [SerializeField] private LayerMask ladderLayer;
+    [SerializeField] private float ladderCheckRadius = 0.2f;
+    [SerializeField] private float climbSpeed = 4f;
+    [SerializeField] private float normalGravity = 1f;
+
+    private bool onLadder;
+
     private void Awake()
     {
+        
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         brain = GetComponent<PlayerBrain>();
@@ -42,6 +54,7 @@ public class playerSideWalk : MonoBehaviour
     private void OnEnable()
     {
         rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = normalGravity;
         wasJumpHeld = false;
         animator.ResetTrigger("JumpStart");
         
@@ -50,7 +63,7 @@ public class playerSideWalk : MonoBehaviour
 
     private void FixedUpdate()
     {
-            if (brain == null) return;
+        if (brain == null) return;
 
         float moveX = brain.MoveInput.x;
         bool moving = Mathf.Abs(moveX) > 0.01f;
@@ -58,6 +71,9 @@ public class playerSideWalk : MonoBehaviour
         // Can sprint only if holding sprint, moving, and have stamina
         bool canSprint = brain.SprintHeld && moving && stamina > 5f;
 
+        float moveY = brain.MoveInput.y;
+
+        onLadder = Physics2D.OverlapCircle(groundCheck.position, ladderCheckRadius, ladderLayer);
         // Drain/regen stamina
         if (canSprint)
             stamina -= staminaDrainPerSecond * Time.fixedDeltaTime;
@@ -69,7 +85,18 @@ public class playerSideWalk : MonoBehaviour
         // Speed based on stamina-allowed sprint
         float speed = canSprint ? runSpeed : walkSpeed;
        
-        rb.linearVelocity = new Vector2(moveX * speed, rb.linearVelocity.y);
+
+       //ladders
+        if(onLadder && Mathf.Abs(moveY) > 0.01f)
+        {
+            rb.gravityScale = 0f;
+            rb.linearVelocity = new Vector2(moveX * speed, moveY * climbSpeed);
+        }
+        else
+        {
+            rb.gravityScale = normalGravity;
+            rb.linearVelocity = new Vector2(moveX * speed, rb.linearVelocity.y);
+        }
 
         // jump
         bool grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -78,7 +105,7 @@ public class playerSideWalk : MonoBehaviour
 
         bool jumpPressedNow = brain.JumpPressed;
 
-        if (jumpPressedNow && !wasJumpHeld && grounded)
+        if (jumpPressedNow && !wasJumpHeld && grounded && !onLadder)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForced, ForceMode2D.Impulse);
@@ -96,6 +123,8 @@ public class playerSideWalk : MonoBehaviour
             
         if (brain.MoveInput.x > 0.01f && transform.localScale.x < 0f) Flip();
         else if (brain.MoveInput.x < -0.01f && transform.localScale.x > 0f) Flip();
+
+        Debug.Log("On Ladder: " + onLadder);
         }
 
         private void Flip()
@@ -111,5 +140,7 @@ public class playerSideWalk : MonoBehaviour
         if (groundCheck == null) return;
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(groundCheck.position, ladderCheckRadius);
     }
 }

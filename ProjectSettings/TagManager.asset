@@ -6,6 +6,9 @@ TagManager:
   tags:
   - teddy
   - CineMachine
+  - Elevator
+  - ElevatorTop
+  - ElevatorBottom
   layers:
   - Default
   - TransparentFX

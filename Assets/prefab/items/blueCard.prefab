@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4df6a1728acd7e1429dfbb362dae0fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlueKeyCard
+  pickupSound: {fileID: 8300000, guid: ca505094afc5ce047b27ca497f468aaf, type: 3}
 --- !u!58 &6774367979010999079
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -139,5 +140,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.75
+  m_Offset: {x: 0, y: -0.040338993}
+  m_Radius: 1.133214

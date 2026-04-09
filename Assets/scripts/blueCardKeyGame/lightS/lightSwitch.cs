@@ -34,7 +34,6 @@ public class lightSwitch : MonoBehaviour, IInteractable
     isOn = !isOn;
     sr.sprite = isOn ? on : off;
 
-    // 🔊 add noise to THIS player
     var noise = player.GetComponent<PlayerNoise>();
     if (noise != null)
     {

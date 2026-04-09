@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class SoundMeterSimple : MonoBehaviour
 {
-    [SerializeField] private PlayerNoise noise;
+    private PlayerNoise noise;
 
     [Header("Bars")]
     [SerializeField] private Image firstLeft;
@@ -26,6 +26,16 @@ public class SoundMeterSimple : MonoBehaviour
 
     [Header("Off Color")]
     [SerializeField] private Color offColor = new Color(0.2f, 0.2f, 0.2f, 1f);
+
+
+    void Start()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            noise = player.GetComponent<PlayerNoise>();
+        }
+    }
 
     private void Update()
     {

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,7 +13,9 @@ public class ElevatorButton : MonoBehaviour, IInteractable
     [SerializeField] private AudioClip startElevator;
     [SerializeField] private AudioClip elevatorLoop;
     [SerializeField] private AudioClip endElevator;
-
+    
+    [Header("NoiseGain")]
+    [SerializeField] private float noiseAmount = 100f;
     private Rigidbody2D rb;
     private AudioSource audioSource;
 
@@ -59,6 +62,11 @@ public class ElevatorButton : MonoBehaviour, IInteractable
 
     public void Interact(PlayerBrain player)
     {
+    var noise = player.GetComponent<PlayerNoise>();
+    if (noise != null)
+    {
+        noise.AddNoise(noiseAmount);
+    }
         if (!player.blueKeyCard)
             return;
 

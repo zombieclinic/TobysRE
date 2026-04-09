@@ -51,15 +51,9 @@ public class GameManager : MonoBehaviour
             Quaternion.identity
         );
 
-        Debug.Log("Player spawned at: " + spawnedPlayer.transform.position);
-
         SetCameraFollow(spawnedPlayer.transform);
     }
-    else
-    {
-        Debug.Log("Existing player found at: " + existingPlayer.transform.position);
-        SetCameraFollow(existingPlayer.transform);
-    }
+    
 }
 
     private void SetCameraFollow(Transform target)

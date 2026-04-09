@@ -6,6 +6,7 @@ public class lightSwitch : MonoBehaviour, IInteractable
     public Sprite on;
     public Sprite off;
     private SpriteRenderer sr;
+    [SerializeField] private AudioClip switchSound;
 
     private bool isOn = false;
 
@@ -20,33 +21,46 @@ public class lightSwitch : MonoBehaviour, IInteractable
 
     private Coroutine timerRoutine;
 
+    [Header("NoiseGain")]
+    [SerializeField] private float noiseAmount = 20f;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
     }
 
     public void Interact(PlayerBrain player)
+{
+    isOn = !isOn;
+    sr.sprite = isOn ? on : off;
+
+    // 🔊 add noise to THIS player
+    var noise = player.GetComponent<PlayerNoise>();
+    if (noise != null)
     {
-        isOn = !isOn;
-        sr.sprite = isOn ? on : off;
-
-        if (isOn)
-        {
-            Light.SetActive(true);
-
-            if (timerRoutine != null)
-                StopCoroutine(timerRoutine);
-
-            timerRoutine = StartCoroutine(LightTimer());
-        }
-        else
-        {
-            Light.SetActive(false);
-
-            if (timerRoutine != null)
-                StopCoroutine(timerRoutine);
-        }
+        noise.AddNoise(noiseAmount);
     }
+
+    if (isOn)
+    {
+        Light.SetActive(true);
+
+        if (timerRoutine != null)
+            StopCoroutine(timerRoutine);
+
+        timerRoutine = StartCoroutine(LightTimer());
+        PlaySwitchSound();
+    }
+    else
+    {
+        Light.SetActive(false);
+
+        if (timerRoutine != null)
+            StopCoroutine(timerRoutine);
+
+        PlaySwitchSound();
+    }
+}
 
     IEnumerator LightTimer()
     {
@@ -68,9 +82,18 @@ public class lightSwitch : MonoBehaviour, IInteractable
             }
         }
 
+      
+
         // shut off
         isOn = false;
         sr.sprite = off;
         Light.SetActive(false);
+    }
+     private void PlaySwitchSound()
+    {
+        if (switchSound == null) return;
+        if (SoundEffectManager.instance == null) return;
+
+        SoundEffectManager.instance.PlaySoundFXClip(switchSound, transform, 1f);
     }
 }

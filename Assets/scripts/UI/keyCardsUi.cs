@@ -3,23 +3,53 @@ using UnityEngine.UIElements;
 
 public class keyCardsUi : MonoBehaviour
 {
+    private UIDocument uiDocument;
+    private PlayerBrain player;
 
-    [Header("UI")]
-      [SerializeField] private UIDocument uiDocument;
-
-    [Header("Player")]
-    [SerializeField] private PlayerBrain player;
-
-    [Header("keyCards")]
     private Image YellowPic;
     private Image RedPic;
     private Image BluePic;
 
-    void Awake()
+    private bool uiSetup = false;
+
+    void Update()
     {
-        player = GetComponent<PlayerBrain>();
+        // 🔹 Find UI Document if missing
+        if (uiDocument == null)
+        {
+            uiDocument = GetComponent<UIDocument>();
+
+            if (uiDocument == null)
+            {
+                uiDocument = FindFirstObjectByType<UIDocument>();
+            }
+
+            if (uiDocument != null && !uiSetup)
+            {
+                SetupUI();
+            }
+        }
+
+    
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+            if (playerObj != null)
+            {
+                player = playerObj.GetComponent<PlayerBrain>();
+            }
+        }
+
+        if (player == null || !uiSetup) return;
+
+        // 🔹 Update UI
+        SetVisible(YellowPic, player.yellowKeyCard);
+        SetVisible(RedPic, player.redKeyCard);
+        SetVisible(BluePic, player.blueKeyCard);
     }
-    void Start()
+
+    private void SetupUI()
     {
         var root = uiDocument.rootVisualElement;
 
@@ -30,14 +60,8 @@ public class keyCardsUi : MonoBehaviour
         SetVisible(YellowPic, false);
         SetVisible(RedPic, false);
         SetVisible(BluePic, false);
-    }
 
-       void Update()
-    {
-    SetVisible(YellowPic, player.yellowKeyCard);
-    SetVisible(RedPic, player.redKeyCard);
-    SetVisible(BluePic, player.blueKeyCard);
-       
+        uiSetup = true;
     }
 
     private void SetVisible(VisualElement el, bool visible)
@@ -45,5 +69,4 @@ public class keyCardsUi : MonoBehaviour
         if (el == null) return;
         el.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
-
 }

@@ -531,10 +531,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::lightSwitch
   on: {fileID: 21300000, guid: b041240006df4c043b5201684e3d8129, type: 3}
   off: {fileID: 21300000, guid: 27f026e3bf88a02408a725850bd15ea5, type: 3}
+  switchSound: {fileID: 8300000, guid: 3ed66492d1d72cf42a92824e44f28ea6, type: 3}
   Light: {fileID: 7266824821748129069}
   timer: 15
   flickerSpeed: 0.5
   flickerStartTime: 5
+  noiseAmount: 20
 --- !u!61 &1846144251695756773
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -717,7 +719,7 @@ GameObject:
   - component: {fileID: 8713657685464320008}
   - component: {fileID: 231593966565118632}
   m_Layer: 7
-  m_Name: Sprite Light 2D
+  m_Name: Sprite Light 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -901,7 +903,7 @@ GameObject:
   - component: {fileID: 1222904164913618460}
   - component: {fileID: 270487120028665453}
   m_Layer: 0
-  m_Name: lightFixture_1
+  m_Name: lightFixture_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -971,7 +973,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -50.38, y: 4.14}
-  m_ConnectedAnchor: {x: -50.38, y: 4.14}
+  m_ConnectedAnchor: {x: 19.031818, y: 3.8176}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:

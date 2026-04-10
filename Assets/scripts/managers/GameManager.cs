@@ -5,6 +5,7 @@ using Unity.Cinemachine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private CinemachineCamera cinemachineCamera;
 
     public static GameManager Instance;
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
     [Header("Battery Save Data")]
     public List<BatterySavedData> batteryData = new List<BatterySavedData>();
     public bool batteriesGenerated = false;
+
+    
 
     private void Awake()
     {
@@ -52,6 +55,7 @@ public class GameManager : MonoBehaviour
         );
 
         SetCameraFollow(spawnedPlayer.transform);
+        AssignPauseMenu(spawnedPlayer);
     }
     
 }
@@ -104,5 +108,24 @@ public class GameManager : MonoBehaviour
         {
             batteryData[index].pickedUp = true;
         }
+    }
+
+    void AssignPauseMenu(GameObject playerObj)
+    {
+        PlayerBrain brain = playerObj.GetComponent<PlayerBrain>();
+
+        if (brain == null)
+        {
+            Debug.LogWarning("PlayerBrain not found on spawned player.");
+            return;
+        }
+
+        if(pauseMenu == null)
+        {
+            Debug.LogWarning("PauseMenu reference is missing on GameManager.");
+            return;
+        }
+
+        brain.SetPauseMenu(pauseMenu);
     }
 }

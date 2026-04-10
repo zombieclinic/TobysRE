@@ -4,7 +4,7 @@ public class BatteryPickup : MonoBehaviour, IInteractable
 {
     [SerializeField] private float fuelAmount = 50f;
     [SerializeField] private AudioClip pickupSound;
-    private bool soundPlaying = false;
+  
 
     private int batteryIndex = -1;
 
@@ -28,7 +28,7 @@ public class BatteryPickup : MonoBehaviour, IInteractable
             GameManager.Instance.MarkBatteryPickedUp(batteryIndex);
         }
          SoundEffectManager.instance.PlaySoundFXClip(pickupSound, transform, 1f);
-        soundPlaying = true;
+      
         
 
         Destroy(gameObject);

@@ -9,6 +9,7 @@ TagManager:
   - Elevator
   - ElevatorTop
   - ElevatorBottom
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

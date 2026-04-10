@@ -194,4 +194,9 @@ public class PlayerBrain : MonoBehaviour
     public void GiveRedKey() => redKeyCard = true;
     public void GiveYellowKey() => yellowKeyCard = true;
     public void GiveBlueKey() => blueKeyCard = true;
+
+    public void SetPauseMenu(GameObject menu)
+{
+    pauseMenu = menu;
+}
 }

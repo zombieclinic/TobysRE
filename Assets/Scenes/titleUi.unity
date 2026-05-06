@@ -266,7 +266,10 @@ GameObject:
   m_Component:
   - component: {fileID: 291796415}
   - component: {fileID: 291796414}
+<<<<<<< HEAD
   - component: {fileID: 291796416}
+=======
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
   m_Layer: 0
   m_Name: title_background_0
   m_TagString: Untagged
@@ -348,6 +351,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!82 &291796416
 AudioSource:
   m_ObjectHideFlags: 0
@@ -445,6 +449,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
 --- !u!1 &885723852
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +580,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1001 &1077174693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5580,6 +5587,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+=======
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
 --- !u!1 &1274570063
 GameObject:
   m_ObjectHideFlags: 0
@@ -5591,7 +5600,10 @@ GameObject:
   - component: {fileID: 1274570065}
   - component: {fileID: 1274570064}
   - component: {fileID: 1274570066}
+<<<<<<< HEAD
   - component: {fileID: 1274570067}
+=======
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -5650,6 +5662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::titleUi
   uiDocument: {fileID: 1274570064}
+<<<<<<< HEAD
   ButtonEffect: {fileID: 1958346346}
   ButtonSound: {fileID: 1274570067}
 --- !u!82 &1274570067
@@ -5749,6 +5762,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
 --- !u!1 &1570233267
 GameObject:
   m_ObjectHideFlags: 0
@@ -10585,6 +10600,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1693215559
 GameObject:
   m_ObjectHideFlags: 0
@@ -15489,6 +15505,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3678053693606914426, guid: 63524389fe90dad4ab917aaf93192273, type: 3}
   m_PrefabInstance: {fileID: 1077174693}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -15498,4 +15516,7 @@ SceneRoots:
   - {fileID: 1570233270}
   - {fileID: 1274570065}
   - {fileID: 291796415}
+<<<<<<< HEAD
   - {fileID: 1077174693}
+=======
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f

@@ -7,12 +7,18 @@ public class titleUi : MonoBehaviour
 
     public UIDocument uiDocument;
 
+<<<<<<< HEAD
 
     private Button startButton;
     private Button exitButton;
     
     [SerializeField] private GameObject ButtonEffect;
     [SerializeField] private AudioSource ButtonSound;
+=======
+    private Button startButton;
+    private Button exitButton;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
     void Start()
     {
         var root = uiDocument.rootVisualElement;
@@ -26,10 +32,15 @@ public class titleUi : MonoBehaviour
     }
 private void OnStartClicked()
     {
+<<<<<<< HEAD
         PlayEffect();
       
         Invoke(nameof(LoadGame), 3f);
         
+=======
+      
+        Invoke(nameof(LoadGame), 1f);
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
     }
 
     private void LoadGame()
@@ -40,9 +51,13 @@ private void OnStartClicked()
     private void OnExitClicked()
     {
 
+<<<<<<< HEAD
         PlayEffect();
         Invoke(nameof(LoadQuit), 3f);
         
+=======
+        Invoke(nameof(LoadQuit), 1f);
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
     }
 
     private void LoadQuit()
@@ -54,6 +69,7 @@ private void OnStartClicked()
     #endif
     }
 
+<<<<<<< HEAD
     private void PlayEffect()
 {
     if (ButtonEffect == null) return;
@@ -72,3 +88,6 @@ private void OnStartClicked()
 
 }
 
+=======
+}
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f

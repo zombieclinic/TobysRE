@@ -11,7 +11,11 @@ GameObject:
   - component: {fileID: 8364023962546995614}
   - component: {fileID: 1309243947152823561}
   - component: {fileID: 681497181680414290}
+<<<<<<< HEAD
   - component: {fileID: 86391005167069898}
+=======
+  - component: {fileID: 4426289381368540036}
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
   m_Layer: 7
   m_Name: battery
   m_TagString: Untagged
@@ -139,7 +143,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9245626, y: 0.99490047}
   m_EdgeRadius: 0
+<<<<<<< HEAD
 --- !u!114 &86391005167069898
+=======
+--- !u!114 &4426289381368540036
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +158,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a6beec955116d459ce9cabe0a210b3, type: 3}
   m_Name: 
+<<<<<<< HEAD
   m_EditorClassIdentifier: Assembly-CSharp::BatteryPickup
   fuelAmount: 50
   pickupSound: {fileID: 8300000, guid: ca505094afc5ce047b27ca497f468aaf, type: 3}
   pickupEffect: {fileID: 2176580315881735003, guid: d9c9ac5e1ab3f8d4083e8cda750a86e8, type: 3}
+=======
+  m_EditorClassIdentifier: Assembly-CSharp::battery
+  fuelAmount: 50
+  pickupSound: {fileID: 8300000, guid: ca505094afc5ce047b27ca497f468aaf, type: 3}
+>>>>>>> 9df20c9712e323a21c46916fb447b423ef3d4c7f

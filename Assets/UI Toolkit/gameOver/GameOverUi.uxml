@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/gameOver/GameOverstyle.uss?fileID=7433441132597879392&amp;guid=d69ef310d7bf5574e82a6e6d3d3359d9&amp;type=3#GameOverstyle"/>
+    <ui:VisualElement style="flex-grow: 1; background-image: none; -unity-background-image-tint-color: rgba(255, 255, 255, 0);">
+        <ui:Label text="Game Over" name="Label" class="Title" style="-unity-font-definition: url(&quot;project://database/Assets/fonts/Creepster-Regular.ttf?fileID=12800000&amp;guid=2205398dff1079d4c9e2a4b3ca441ff9&amp;type=3#Creepster-Regular&quot;); color: rgb(84, 12, 16);"/>
+    </ui:VisualElement>
+</ui:UXML>

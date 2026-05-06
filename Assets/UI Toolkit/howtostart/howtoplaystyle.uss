@@ -1,0 +1,29 @@
+:root {
+}
+
+.instructions {
+    font-size: 50px;
+    color: rgb(5, 75, 16);
+    padding-left: 0;
+    margin-left: 100px;
+}
+
+.Titles {
+    font-size: 80px;
+    color: rgb(5, 75, 16);
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/fonts/Creepster-Regular.ttf?fileID=12800000&guid=2205398dff1079d4c9e2a4b3ca441ff9&type=3#Creepster-Regular");
+}
+
+.button {
+    color: rgb(5, 75, 16);
+    font-size: 50px;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0);
+    background-color: rgba(129, 129, 129, 0);
+    -unity-font-style: bold;
+}
+
+.button:hover {
+    color: rgb(120, 0, 7);
+    scale: 1.1 1.1;
+}

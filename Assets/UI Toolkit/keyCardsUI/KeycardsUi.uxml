@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Image name="redKeyLabel" style="background-image: url(&quot;project://database/Assets/sprites/items/keycards/redCard.png?fileID=2800000&amp;guid=b2c5e4075b93d444b92531c1dcc0f43e&amp;type=3#redCard&quot;); height: 155px; width: 150px;"/>
+        <ui:Image name="blueKeyLabel" data-source="" style="background-image: url(&quot;project://database/Assets/sprites/items/keycards/blueCard.png?fileID=2800000&amp;guid=50a99604b3473a842bcdffc7bda519f4&amp;type=3#blueCard&quot;); height: 150px; width: 150px;"/>
+        <ui:Image name="yellowKeyLabel" style="width: 150px; height: 150px; background-image: url(&quot;project://database/Assets/sprites/items/keycards/yellowCard.png?fileID=2800000&amp;guid=dc6537ab298816d40b3b1a271ad1755b&amp;type=3#yellowCard&quot;);"/>
+    </ui:VisualElement>
+</ui:UXML>
